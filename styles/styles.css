@@ -1,0 +1,51 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    font-family: "Parkinsans";
+    font-size: 3rem;
+    padding: 10px;
+    text-align: center;
+    background-color: rgb(126, 200, 224);
+}
+
+main {
+    flex: 1;
+    background-color: rgb(126, 200, 224);
+    display: flex;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 0px 30px 0px;
+}
+
+main div {
+    width: 20vw;
+}
+
+#buttons {
+    font-family: "Parkinsans";
+    padding: 50px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#newBookButton {
+    cursor: pointer;
+    background-color: rgb(104, 188, 216);
+    border: none;
+    border-radius: 8px;
+    padding: 15px;
+    font-size: 2rem;
+    transition: 0.1s ease;
+}
+
+#newBookButton:hover {
+    transform: scale(1.05);
+    box-shadow: 2px 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+#books {
+    flex: 1 1 0;
+}
