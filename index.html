@@ -9,7 +9,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&display=swap" rel="stylesheet">
 
-    <link href="./node_modules/modern-normalize/modern-normalize.css" rel="stylesheet">
     <link href="./styles/reset.css" rel="stylesheet">
     <link href="./styles/styles.css" rel="stylesheet">
 
@@ -17,7 +16,7 @@
 </head>
 <body>
     <div id="backdrop"></div>
-    <div class="modal" id="add-book">
+    <div class="modal" id="add-book-modal">
         <div class="modal__content">
             <label for="title">Book Title</label>
             <input type="text" name="title" class="input-text-modal">
@@ -28,7 +27,10 @@
                 <input type="checkbox" name="have-read">
             </div>
         </div>
-        <div class="modal__actions"></div>
+        <div class="modal__actions">
+            <button id="cancel-modal">Cancel</button>
+            <button id="confirm-modal">Confirm</button>
+        </div>
     </div>
     <header>myLibrary</header>
     <main>
