@@ -16,9 +16,23 @@
     <script src="script.js" defer></script>
 </head>
 <body>
+    <div id="backdrop"></div>
+    <div class="modal" id="add-book">
+        <div class="modal__content">
+            <label for="title">Book Title</label>
+            <input type="text" name="title" class="input-text-modal">
+            <label for="author">Book Author</label>
+            <input type="text" name="author" class="input-text-modal">
+            <div id="checkbox-container">
+                <label for="have-read" id="have-read-label">Did you read the book?</label>
+                <input type="checkbox" name="have-read">
+            </div>
+        </div>
+        <div class="modal__actions"></div>
+    </div>
     <header>myLibrary</header>
     <main>
-        <div id="buttons"><button id="newBookButton">New Book</button></div>
+        <div id="library-actions"><button id="new-book-button">New Book</button></div>
         <div id="books"></div>
         <div></div>
     </main>
