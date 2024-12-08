@@ -36,10 +36,7 @@ const closeModalHandler = function() {
     toggleModalCard();
 }
 
-const checkUserInput = function() {
-    const bookTitle = document.querySelector("input[name='title']").value;
-    const bookAuthor = document.querySelector("input[name='author']").value;
-
+const checkUserInput = function(bookTitle, bookAuthor) {
     if (bookTitle === '' || bookAuthor === '') {
         return false;
     } else {
@@ -47,9 +44,31 @@ const checkUserInput = function() {
     }
 }
 
+const clearInput = function(bookTitleElement, bookAuthorElement, haveReadCheckboxElement) {
+    bookTitleElement.value = '';
+    bookAuthorElement.value = '';
+    haveReadCheckboxElement.checked = false;
+}
+
 const addBookHandler = function() {
-    const isInputValid = checkUserInput();
-    if (!isInputValid) return;
+    const bookTitleElement = document.querySelector("input[name='title']");
+    const bookAuthorElement = document.querySelector("input[name='author']");
+    const haveReadCheckboxElement = document.querySelector("input[name='have-read']");
+
+    const isInputValid = checkUserInput(bookTitleElement.value, bookAuthorElement.value);
+    
+    if (!isInputValid) {
+        alert("Invalid input");
+        return;
+    }
+
+    closeModalHandler();
+
+    clearInput(bookTitleElement, bookAuthorElement, haveReadCheckboxElement);
+
+    addBookToLibrary(bookTitle, bookAuthor, haveReadCheckbox.checked);
+
+    
     // updateLibraryUI();
 }
 
