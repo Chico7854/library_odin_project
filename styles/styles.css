@@ -24,6 +24,16 @@ main div {
     width: 20vw;
 }
 
+label {
+    font-family: "Parkinsans";
+    font-size: 1.75rem;
+    font-weight: 400;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
 #backdrop {
     position: fixed;
     width: 100%;
@@ -51,10 +61,6 @@ main div {
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-
-    font-family: "Parkinsans";
-    font-size: 1.75rem;
-    font-weight: 400;
 }
 
 .modal.visible {
@@ -65,14 +71,14 @@ main div {
 .modal__content {
     display: flex;
     flex-direction: column;
-}
+    gap: 30px;
 
-.modal__content input {
     margin-bottom: 30px;
 }
 
 .input-text-modal {
     height: 30px;
+    width: 100%;
 }
 
 input[type="checkbox"] {
@@ -80,10 +86,27 @@ input[type="checkbox"] {
     margin-left: 20px;
 }
 
+.modal__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+#cancel-modal {
+    background-color: red;
+}
+
+#confirm-modal {
+    background-color: green;
+}
+
 .modal__actions button {
     background-color: white;
     border: 1px solid black;
     border-radius: 8px;
+    font-family: "Parkinsans";
+    font-size: 1.5rem;
+    font-weight: 400;
 }
 
 #library-actions {
