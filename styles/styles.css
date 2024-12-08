@@ -52,15 +52,16 @@ button:hover {
 .modal {
     position: fixed;
     width: 40%;
-    top: 30vh;
-    left: 30%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 100;
-    /* display: none; */
+    display: none;
     
     background-color: white;
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    box-shadow: 5px 10px 10px 10px rgba(0, 0, 0, 0.75);
 }
 
 .modal.visible {
@@ -89,7 +90,7 @@ input[type="checkbox"] {
 .modal__actions {
     display: flex;
     justify-content: flex-end;
-    gap: 20px;
+    gap: 15px;
 }
 
 #cancel-modal {
@@ -104,6 +105,8 @@ input[type="checkbox"] {
     background-color: white;
     border: 1px solid black;
     border-radius: 8px;
+    padding: 5px 10px;
+
     font-family: "Parkinsans";
     font-size: 1.5rem;
     font-weight: 400;
