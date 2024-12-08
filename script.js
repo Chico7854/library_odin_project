@@ -1,6 +1,7 @@
 const addBookButton = document.getElementById("new-book-button");
 const backdrop = document.getElementById("backdrop");
 const modalCard = document.getElementById("add-book-modal");
+const cancelModalButton = document.getElementById("cancel-modal")
 
 const library = [];
 
@@ -36,3 +37,4 @@ const closeModalHandler = function() {
 
 addBookButton.addEventListener("click", addBookHandler);
 backdrop.addEventListener("click", closeModalHandler);
+cancelModalButton.addEventListener("click", closeModalHandler);
