@@ -146,4 +146,23 @@ input[type="checkbox"] {
 
 #books {
     flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.book {
+    width: 100%;
+
+    background-color: rgb(104, 188, 216);
+    border: 2px solid black;
+    border-radius: 40px;
+
+    font-family: "Parkinsans";
+    text-align: center;
+}
+
+.book h1 {
+    font-weight: 400;
+    font-size: 1.5rem;
 }
