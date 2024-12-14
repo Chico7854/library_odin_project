@@ -5,6 +5,12 @@ body {
     flex-direction: column;
 }
 
+ul, li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }  
+
 header {
     font-family: "Parkinsans";
     font-size: 3rem;
@@ -145,10 +151,13 @@ input[type="checkbox"] {
 }
 
 #books {
+    padding-top: 40px;
+
     flex: 1 1 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 40px;
 }
 
 .book {
