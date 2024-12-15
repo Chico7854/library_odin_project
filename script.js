@@ -1,105 +1,88 @@
-const openModalButton = document.getElementById("new-book-button");
-const backdrop = document.getElementById("backdrop");
-const modalCard = document.getElementById("add-book-modal");
-const cancelButton = document.getElementById("cancel-modal");
-const confirmButton = document.getElementById("confirm-modal");
+class Modal {
+    static backdropElement = document.getElementById("backdrop");
+    static modalElement = document.getElementById("add-book-modal");
+    static titleInputElement = document.querySelector("input[name='title']");
+    static authorInputElement = document.querySelector("input[name='author']");
+    static haveReadCheckboxElement = document.querySelector("input[name='have-read']");
 
-const library = [];
+    static toggleModal() {
+        Modal.modalElement.classList.toggle("visible");
+        Modal.backdropElement.classList.toggle("visible");
+    }
 
-const Book = function(title, author, haveRead) {
-    this.title = title;
-    this.author = author;
-    this.haveRead = haveRead;
-}
+    static clearModalInputs() {
+        Modal.titleInputElement.value = "";
+        Modal.authorInputElement.value = "";
+        Modal.haveReadCheckboxElement.checked = false;
+    }
 
-const updateLibraryUI = (title, author, haveRead) => {
-    const libraryUI = document.getElementById("books");
-    const bookElement = document.createElement('li');
-    bookElement.classList.add("book");
-
-    const titleElement = document.createElement('h2');
-    titleElement.textContent = title;
-
-    const byElement = document.createElement('p');
-    byElement.textContent = "by";
-
-    const authorElement = document.createElement('h2');
-    authorElement.textContent = author;
-
-    const haveReadElement = document.createElement('h2');
-    haveReadElement.textContent = (haveRead) ? "Have Read" : "Didn't Read";
-
-    bookElement.appendChild(titleElement);
-    bookElement.appendChild(byElement);
-    bookElement.appendChild(authorElement);
-    bookElement.appendChild(haveReadElement);
-
-    libraryUI.appendChild(bookElement);
-}
-
-const addBookToLibrary = (title, author, haveRead) => {
-    const book = new Book(title, author, haveRead);
-
-    library.push(book);
-
-    updateLibraryUI(title, author, haveRead);
-}
-
-const toggleBackdrop = function() {
-    backdrop.classList.toggle("visible");
-}
-
-const toggleModalCard = function() {
-    modalCard.classList.toggle("visible");
-}
-
-const openModalHandler = function() {
-    toggleBackdrop();
-    toggleModalCard();
-}
-
-const closeModalHandler = function() {
-    toggleBackdrop();
-    toggleModalCard();
-    clearInput();
-}
-
-const checkUserInput = function(bookTitle, bookAuthor) {
-    if (bookTitle === '' || bookAuthor === '') {
-        return false;
-    } else {
-        return true;
+    static closeModal() {
+        Modal.toggleModal();
+        Modal.clearModalInputs();
     }
 }
 
-const clearInput = function() {
-    const bookTitleElement = document.querySelector("input[name='title']");
-    const bookAuthorElement = document.querySelector("input[name='author']");
-    const haveReadCheckboxElement = document.querySelector("input[name='have-read']");
-
-    bookTitleElement.value = '';
-    bookAuthorElement.value = '';
-    haveReadCheckboxElement.checked = false;
+class Book {
+    constructor(title, author, haveRead) {
+        this.title = title;
+        this.author = author;
+        this.haveRead = haveRead;
+    }
 }
 
-const addBookHandler = function() {
-    const bookTitle = document.querySelector("input[name='title']").value;
-    const bookAuthor = document.querySelector("input[name='author']").value;
-    const haveRead = document.querySelector("input[name='have-read']").checked;
-
-    const isInputValid = checkUserInput(bookTitle, bookAuthor);
-    
-    if (!isInputValid) {
-        alert("Invalid input");
-        return;
+class Library {
+    constructor() {
+        this.library = [];
+        this.connectAddBookButton();
     }
 
-    closeModalHandler();
+    fetchBook() {
+        const title = document.querySelector("input[name='title']").value;
+        const author = document.querySelector("input[name='author']").value;
+        const haveRead = document.querySelector("input[name='have-read']").checked;
 
-    addBookToLibrary(bookTitle, bookAuthor, haveRead);
+        if (title === "" || author === "") {
+            alert("Invalid Input");
+            return false;
+        } else {
+            return new Book(title, author, haveRead);
+        }
+    }
+
+    connectAddBookButton() {
+        const addBookButton = document.getElementById("confirm-modal");
+
+        addBookButton.addEventListener("click", () => {
+            const book = this.fetchBook();
+            if (book) {
+                this.library.push(book);
+                console.log(this.library);
+                Modal.closeModal();
+            }
+        });
+    }
 }
 
-openModalButton.addEventListener("click", openModalHandler);
-backdrop.addEventListener("click", closeModalHandler);
-cancelButton.addEventListener("click", closeModalHandler);
-confirmButton.addEventListener("click", addBookHandler);
+class App {
+    static init() {
+        const library = new Library();
+
+        App.openNewBookModal();
+        App.closeNewBookModal();
+    }
+
+    static openNewBookModal() {
+        const newBookButton = document.getElementById("new-book-button");
+        newBookButton.addEventListener("click", Modal.toggleModal);
+    }
+
+    static closeNewBookModal() {
+        const cancelButton = document.getElementById("cancel-modal");
+        const backdropElement = document.getElementById("backdrop");
+
+        cancelButton.addEventListener("click", Modal.closeModal);
+        backdropElement.addEventListener("click", Modal.closeModal);
+    }
+}
+
+App.init();
