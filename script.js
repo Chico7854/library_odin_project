@@ -38,6 +38,28 @@ class Library {
     addBook(title, author, haveRead) {
         const book = new Book(title, author, haveRead);
         this.library.push(book);
+        this.updateUI(book);
+    }
+
+    updateUI(book) {
+        const libraryUI = document.getElementById("books");
+        const bookElement = document.createElement("li");
+        const titleElement = document.createElement("h2");
+        const byElement = document.createElement("p");
+        const authorElement = document.createElement("h2");
+        const haveReadElement = document.createElement("h2");
+
+        bookElement.classList.add("book");
+        titleElement.textContent = book.title;
+        byElement.textContent = "by";
+        authorElement.textContent = book.author;
+        haveReadElement.textContent = (book.haveRead) ? "Have Read" : "Didn't Read";
+
+        bookElement.appendChild(titleElement);
+        bookElement.appendChild(byElement);
+        bookElement.appendChild(authorElement);
+        bookElement.appendChild(haveReadElement);
+        libraryUI.appendChild(bookElement);
     }
 }
 
@@ -57,10 +79,9 @@ class App {
 
     connectCloseModalButtons() {
         const cancelButton = document.getElementById("cancel-modal");
-        const backdropElement = document.getElementById("backdrop");
 
         cancelButton.addEventListener("click", Modal.closeModal);
-        backdropElement.addEventListener("click", Modal.closeModal);
+        Modal.backdropElement.addEventListener("click", Modal.closeModal);
     }
 
     connectAddBookButton() {
@@ -83,3 +104,5 @@ class App {
 }
 
 const app = new App();
+
+app.click() 
