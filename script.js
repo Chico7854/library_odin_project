@@ -33,29 +33,48 @@ class Book {
 class Library {
     constructor() {
         this.library = [];
+    }
+
+    addBook(title, author, haveRead) {
+        const book = new Book(title, author, haveRead);
+        this.library.push(book);
+    }
+}
+
+class App {
+    constructor() {
+        this.library = new Library();
+
+        this.connectNewBookButton();
+        this.connectCloseModalButtons();
         this.connectAddBookButton();
     }
 
-    fetchBook() {
-        const title = document.querySelector("input[name='title']").value;
-        const author = document.querySelector("input[name='author']").value;
-        const haveRead = document.querySelector("input[name='have-read']").checked;
+    connectNewBookButton() {
+        const newBookButton = document.getElementById("new-book-button");
+        newBookButton.addEventListener("click", Modal.toggleModal);
+    }
 
-        if (title === "" || author === "") {
-            alert("Invalid Input");
-            return false;
-        } else {
-            return new Book(title, author, haveRead);
-        }
+    connectCloseModalButtons() {
+        const cancelButton = document.getElementById("cancel-modal");
+        const backdropElement = document.getElementById("backdrop");
+
+        cancelButton.addEventListener("click", Modal.closeModal);
+        backdropElement.addEventListener("click", Modal.closeModal);
     }
 
     connectAddBookButton() {
         const addBookButton = document.getElementById("confirm-modal");
 
         addBookButton.addEventListener("click", () => {
-            const book = this.fetchBook();
-            if (book) {
-                this.library.push(book);
+            const title = Modal.titleInputElement.value;
+            const author = Modal.authorInputElement.value;
+            const haveRead = Modal.haveReadCheckboxElement.checked;
+    
+            if (title === "" || author === "") {
+                alert("Invalid Input");
+            } else {
+                this.library.addBook(title, author, haveRead);
                 console.log(this.library);
                 Modal.closeModal();
             }
@@ -63,26 +82,4 @@ class Library {
     }
 }
 
-class App {
-    static init() {
-        const library = new Library();
-
-        App.openNewBookModal();
-        App.closeNewBookModal();
-    }
-
-    static openNewBookModal() {
-        const newBookButton = document.getElementById("new-book-button");
-        newBookButton.addEventListener("click", Modal.toggleModal);
-    }
-
-    static closeNewBookModal() {
-        const cancelButton = document.getElementById("cancel-modal");
-        const backdropElement = document.getElementById("backdrop");
-
-        cancelButton.addEventListener("click", Modal.closeModal);
-        backdropElement.addEventListener("click", Modal.closeModal);
-    }
-}
-
-App.init();
+const app = new App();
