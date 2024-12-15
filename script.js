@@ -43,16 +43,20 @@ class Library {
 
     updateUI(book) {
         const libraryUI = document.getElementById("books");
-        const bookElement = document.createElement("li");
-        const titleElement = document.createElement("h2");
-        const byElement = document.createElement("p");
-        const authorElement = document.createElement("h2");
-        const haveReadElement = document.createElement("h2");
 
+        const bookElement = document.createElement("li");
         bookElement.classList.add("book");
+
+        const titleElement = document.createElement("h2");
         titleElement.textContent = book.title;
+
+        const byElement = document.createElement("p");
         byElement.textContent = "by";
+
+        const authorElement = document.createElement("h2");
         authorElement.textContent = book.author;
+
+        const haveReadElement = document.createElement("h2");
         haveReadElement.textContent = (book.haveRead) ? "Have Read" : "Didn't Read";
 
         bookElement.appendChild(titleElement);
@@ -104,5 +108,3 @@ class App {
 }
 
 const app = new App();
-
-app.click() 
