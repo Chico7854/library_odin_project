@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&display=swap" rel="stylesheet">
+
+    <link href="/css/reset.css" rel="stylesheet">
+    <link href="/css/styles.css" rel="stylesheet">
+
+    <script src="/js/script.js" defer></script>
+</head>
+<body>
+    <div id="backdrop"></div>
+    <div class="modal" id="add-book-modal">
+        <div class="modal__content">
+            <div>
+                <label>
+                    Book Title
+                    <input type="text" name="title" class="input-text-modal">
+                </label>
+            </div>
+            <div>
+                <label>
+                    Book Author
+                    <input type="text" name="author" class="input-text-modal">
+                </label>
+            </div>
+            <div id="checkbox-container">
+                <label id="have-read-label">
+                    Did you read the book?
+                    <input type="checkbox" name="have-read">
+                </label>
+            </div>
+        </div>
+        <div class="modal__actions">
+            <button id="cancel-modal">Cancel</button>
+            <button id="confirm-modal">Confirm</button>
+        </div>
+    </div>
+    <header>myLibrary</header>
+    <main>
+        <div id="library-actions"><button id="new-book-button">New Book</button></div>
+        <ul id="books">
+        </ul>
+        <div></div>
+    </main>
+</body>
+</html>
