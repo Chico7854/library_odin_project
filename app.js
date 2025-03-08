@@ -1,9 +1,11 @@
 const path = require("path");
 
 const express = require("express");
+const mongoose = require("mongoose");
 
 const routes = require("./routes/main");
 
+const MONGODB_URI = "mongodb+srv://lacus7854:dl2RZ1UdK4Xd$9N@librarycluster.ncdub.mongodb.net/?retryWrites=true&w=majority&appName=libraryCluster"
 const app = express();
 
 app.set("view engine", "ejs");
@@ -13,4 +15,8 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(routes);
 
-app.listen(3000);
+mongoose.connect(MONGODB_URI)
+    .then(() => {
+        app.listen(3000);
+    })
+    .catch(err => console.log(err));
