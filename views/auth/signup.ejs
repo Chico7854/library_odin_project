@@ -1,5 +1,6 @@
 <%- include("../includes/head.ejs") %>
     <title>Sign Up</title>
+    <script type="module" src="/js/auth/signup.js" defer></script>
 </head>
 <body>
     <%- include("../includes/navigation.ejs") %>
@@ -21,7 +22,7 @@
                 <label for="confirm-password">Confirm Password</label>
                 <input type="text" name="confirm-password" id="confirm-password">
             </div>
-            <button>Sign Up</button>
+            <button id="signup">Sign Up</button>
         </div>
     </main>
 </body>

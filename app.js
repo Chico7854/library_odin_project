@@ -13,6 +13,14 @@ app.set("view engine", "ejs");
 app.set("views", "views");
 
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.json());
+
+app.use((req, res, next) => {
+    res.setHeader("Allow-Control-Access-Origin", "*");
+    res.setHeader("Allow-Control-Access-Methods", "GET, POST, PUT, PATCH, DELETE");
+    res.setHeader("Allow-Control-Access-Header", "Content-Type, Authorization");
+    next();
+})
 
 app.use(mainRoutes);
 app.use(authRoutes);

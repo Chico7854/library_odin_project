@@ -25,11 +25,6 @@ nav {
     background-color: rgb(126, 200, 224);
 }
 
-header {
-    /* font-family: "Parkinsans"; */
-    font-size: 2rem;
-}
-
 main {
     flex: 1;
     background-color: rgb(126, 200, 224);
@@ -136,6 +131,10 @@ input[type="checkbox"] {
     font-family: "Parkinsans";
     font-size: 1.5rem;
     font-weight: 400;
+}
+
+#logo {
+    font-size: 2rem;
 }
 
 #login-options {
