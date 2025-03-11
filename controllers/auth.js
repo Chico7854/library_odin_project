@@ -16,7 +16,6 @@ exports.postSignup = (req, res, next) => {
     });
     user.save()
         .then(() => {
-            console.log("Success");
             res.redirect("/");
         })
         .catch(err => {
