@@ -1,10 +1,12 @@
-const User = require("../models/user");
+import { Request, Response, NextFunction } from "express";
 
-exports.getSignup = (req, res, next) => {
+import User from "../models/user";
+
+export const getSignup = (req: Request, res: Response, next: NextFunction) => {
     res.render("auth/signup");
 }
 
-exports.postSignup = (req, res, next) => {
+export const postSignup = (req: Request, res: Response, next: NextFunction) => {
     const username = req.body.username;
     const email = req.body.email;
     const password = req.body.password;
