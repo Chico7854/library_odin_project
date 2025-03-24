@@ -6,7 +6,7 @@ export const getSignup = (req: Request, res: Response, next: NextFunction) => {
     res.render("auth/signup");
 }
 
-export const postSignup = (req: Request, res: Response, next: NextFunction) => {
+export const postSignup = async (req: Request, res: Response, next: NextFunction) => {
     const username = req.body.username;
     const email = req.body.email;
     const password = req.body.password;
@@ -16,11 +16,11 @@ export const postSignup = (req: Request, res: Response, next: NextFunction) => {
         email: email,
         password: password
     });
-    user.save()
-        .then(() => {
-            res.redirect("/");
-        })
-        .catch(err => {
-            console.log(err);
-        })
+
+    try {
+        await user.save();
+        res.redirect("/");
+    } catch (err) {
+        console.log(err);
+    }
 }
