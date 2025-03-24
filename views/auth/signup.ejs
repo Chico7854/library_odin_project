@@ -5,24 +5,24 @@
 <body>
     <%- include("../includes/navigation.ejs") %>
     <main>
-        <div>
+        <form action="/signup" method="POST">
             <div>
                 <label for="username">Username</label>
-                <input type="text" name="username" id="username">
+                <input type="text" name="username">
             </div>
             <div>
                 <label for="email">Email</label>
-                <input type="email" name="email" id="email">
+                <input type="email" name="email">
             </div>
             <div>
                 <label for="password">Password</label>
-                <input type="text" name="password" id="password">
+                <input type="text" name="password">
             </div>
             <div>
                 <label for="confirm-password">Confirm Password</label>
-                <input type="text" name="confirm-password" id="confirm-password">
+                <input type="text" name="confirm-password">
             </div>
-            <button id="signup">Sign Up</button>
-        </div>
+            <button type="submit">Sign Up</button>
+        </form>
     </main>
 </body>
