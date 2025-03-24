@@ -1,6 +1,6 @@
 import path from "path";
 
-import express from "express";
+import express, { Request, Response, NextFunction } from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 
@@ -19,6 +19,10 @@ app.use(express.json());
 app.use(cors());
 app.use(mainRoutes);
 app.use(authRoutes);
+
+app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
+    console.error(error);
+})
 
 mongoose.connect(MONGODB_URI)
     .then(() => {

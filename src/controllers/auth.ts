@@ -21,6 +21,6 @@ export const postSignup = async (req: Request, res: Response, next: NextFunction
         await user.save();
         res.redirect("/");
     } catch (err) {
-        console.log(err);
+        next(err);
     }
 }
