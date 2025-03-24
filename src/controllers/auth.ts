@@ -19,6 +19,8 @@ export const postSignup = async (req: Request, res: Response, next: NextFunction
 
     try {
         await user.save();
+        req.session.isLoggedIn = true;
+        req.session.userId = user._id.toString();
         res.redirect("/");
     } catch (err) {
         next(err);
