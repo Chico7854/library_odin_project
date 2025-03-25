@@ -2,16 +2,14 @@ import { Request, Response, NextFunction } from "express";
 import { hash, compare } from "bcrypt";
 import createHttpError from "http-errors";
 
-import User from "../models/user";
+import User from "../models/User";
 
 export const getSignup = (req: Request, res: Response, next: NextFunction) => {
     res.render("auth/signup");
 }
 
 export const postSignup = async (req: Request, res: Response, next: NextFunction) => {
-    const username = req.body.username;
-    const email = req.body.email;
-    const password = req.body.password;
+    const { username, email, password } = req.body;
 
     const hashedPassword = await hash(password, 12);
 

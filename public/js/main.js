@@ -36,9 +36,22 @@ class Library {
     }
 
     addBook(title, author, haveRead) {
+        const csrfToken = document.getElementById("_csrf").value;
         const book = new Book(title, author, haveRead);
         this.library.push(book);
         this.updateUI(book);
+        fetch("http://localhost:3000/add-book", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "x-csrf-token": csrfToken
+            },
+            body: JSON.stringify({
+                title: title,
+                author: author,
+                haveRead: haveRead 
+            })
+        })
     }
 
     updateUI(book) {
@@ -100,7 +113,6 @@ class App {
                 alert("Invalid Input");
             } else {
                 this.library.addBook(title, author, haveRead);
-                console.log(this.library);
                 Modal.closeModal();
             }
         });

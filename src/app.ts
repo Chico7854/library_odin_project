@@ -33,6 +33,7 @@ app.set("views", "views");
 
 app.use(express.static(path.join(__dirname, "..", "public")));
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json())
 
 app.use(cors());
 app.use(helmet());
@@ -45,6 +46,9 @@ app.use(
         store: store
     })
 );
+app.use((req: Request, res: Response, next: NextFunction) => {
+    next();
+})
 app.use(cookieParser());
 app.use(doubleCsrfProtection);
 app.use((req: Request, res: Response, next: NextFunction) => {
@@ -52,7 +56,6 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     res.locals.csrfToken = generateToken(req, res);
     next();
 });
-
 
 app.use(mainRoutes);
 app.use(authRoutes);

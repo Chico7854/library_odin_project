@@ -1,6 +1,6 @@
 <%- include("./includes/head.ejs") %>    
     <title>Library</title>
-    <script src="/js/script.js" defer></script>
+    <script src="/js/main.js" defer></script>
 </head>
 <body>
     <%- include("./includes/navigation.ejs") %>
@@ -32,7 +32,10 @@
         </div>
     </div>
     <main>
-        <div id="library-actions"><button id="new-book-button">New Book</button></div>
+        <div id="library-actions">
+            <button id="new-book-button">New Book</button>
+            <input type="hidden" id="_csrf" value="<%= csrfToken %>">
+        </div>
         <ul id="books">
         </ul>
         <div></div>
