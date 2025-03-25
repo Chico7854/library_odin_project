@@ -3,9 +3,22 @@ import createHttpError from "http-errors";
 
 import Book from "../models/Book";
 import User from "../models/User";
+import { create } from "domain";
 
-export const getIndex = (req: Request, res: Response, next: NextFunction) => {
-    res.render("index");
+export const getIndex = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const user = await User.findById(req.session.userId);
+        if (!user) {
+            throw createHttpError(404, "User not found.");
+        }
+        await user.populate("library.bookId");
+        console.log(user);
+        res.render("index", {
+            books: user.library
+        });
+    } catch (err) {
+        next(err);
+    }
 }
 
 export const addBook = async (req: Request, res: Response, next: NextFunction) => {

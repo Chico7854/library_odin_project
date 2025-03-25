@@ -1,6 +1,6 @@
 <%- include("./includes/head.ejs") %>    
     <title>Library</title>
-    <script src="/js/main.js" defer></script>
+    <!-- <script src="/js/main.js" defer></script> -->
 </head>
 <body>
     <%- include("./includes/navigation.ejs") %>
@@ -37,6 +37,15 @@
             <input type="hidden" id="_csrf" value="<%= csrfToken %>">
         </div>
         <ul id="books">
+            <% if (books.length > 0) { %>
+                <% books.forEach(book => { %>
+                    <li class="book">
+                        <h2><%= book.bookId.title %></h2>
+                        <p>by</p>
+                        <h2><%= book.bookId.author %></h2>
+                    </li>
+                <% }) %>
+            <% } %>
         </ul>
         <div></div>
     </main>
