@@ -22,7 +22,7 @@ const store = new mongoDBStore({
 const { generateToken, doubleCsrfProtection } = doubleCsrf({
     getSecret: () => "my secret",
     cookieName: "csrf-protection",
-    cookieOptions: { secure: false, maxAge: 604800000 },
+    cookieOptions: { secure: true, maxAge: 604800000 },
     getTokenFromRequest: (req) => req.body._csrf || req.headers["x-csrf-token"]
 });
 
@@ -44,6 +44,7 @@ app.use(
 app.use(cookieParser());
 app.use(doubleCsrfProtection);
 app.use((req: Request, res: Response, next: NextFunction) => {
+    res.locals.isAuthorized = req.session.isLoggedIn;
     res.locals.csrfToken = generateToken(req, res);
     next();
 });

@@ -57,3 +57,9 @@ export const postLogin = async (req: Request, res: Response, next: NextFunction)
         next(err);
     }
 };
+
+export const postLogout = (req: Request, res: Response, next: NextFunction) => {
+    req.session.destroy(() => {
+        res.redirect("/");
+    });
+};
