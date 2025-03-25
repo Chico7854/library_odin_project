@@ -13,6 +13,7 @@
   "dependencies": {
     "@types/express": "^5.0.1",
     "bcrypt": "^5.1.1",
+    "compression": "^1.8.0",
     "connect-mongodb-session": "^5.0.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
@@ -20,15 +21,18 @@
     "ejs": "^3.1.10",
     "express": "^4.21.2",
     "express-session": "^1.18.1",
+    "helmet": "^8.1.0",
     "http-errors": "^2.0.0",
     "mongoose": "^8.12.1"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
+    "@types/compression": "^1.7.5",
     "@types/connect-mongodb-session": "^2.4.7",
     "@types/cookie-parser": "^1.4.8",
     "@types/cors": "^2.8.17",
     "@types/express-session": "^1.18.1",
+    "@types/helmet": "^0.0.48",
     "@types/http-errors": "^2.0.4",
     "@types/mongoose": "^5.11.96",
     "nodemon": "^3.1.9",

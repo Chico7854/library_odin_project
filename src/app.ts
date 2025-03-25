@@ -7,6 +7,8 @@ import mongoose from "mongoose";
 import cors from "cors";
 import { doubleCsrf } from "csrf-csrf";
 import cookieParser from "cookie-parser";
+import helmet from "helmet";
+import compression from "compression";
 
 import mainRoutes from "./routes/main";
 import authRoutes from "./routes/auth";
@@ -33,6 +35,8 @@ app.use(express.static(path.join(__dirname, "..", "public")));
 app.use(express.urlencoded({ extended: false }));
 
 app.use(cors());
+app.use(helmet());
+app.use(compression());
 app.use(
     session({
         secret: "my secret",
