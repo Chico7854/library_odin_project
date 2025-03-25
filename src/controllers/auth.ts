@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+import { hash } from "bcrypt";
 
 import User from "../models/user";
 
@@ -11,10 +12,12 @@ export const postSignup = async (req: Request, res: Response, next: NextFunction
     const email = req.body.email;
     const password = req.body.password;
 
+    const hashedPassword = hash(password, 12);
+
     const user = new User({
         username: username,
         email: email,
-        password: password
+        password: hashedPassword
     });
 
     try {
