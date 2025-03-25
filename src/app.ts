@@ -3,8 +3,10 @@ import path from "path";
 import express, { Request, Response, NextFunction } from "express";
 import session from "express-session";
 import connectMongoDBStore from "connect-mongodb-session"
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 import cors from "cors";
+import { doubleCsrf } from "csrf-csrf";
+import cookieParser from "cookie-parser";
 
 import mainRoutes from "./routes/main";
 import authRoutes from "./routes/auth";
@@ -16,6 +18,12 @@ const mongoDBStore = connectMongoDBStore(session);
 const store = new mongoDBStore({
     uri: MONGODB_URI,
     collection: "sessions"
+});
+const { generateToken, doubleCsrfProtection } = doubleCsrf({
+    getSecret: () => "my secret",
+    cookieName: "csrf-protection",
+    cookieOptions: { secure: false, maxAge: 604800000 },
+    getTokenFromRequest: (req) => req.body._csrf || req.headers["x-csrf-token"]
 });
 
 app.set("view engine", "ejs");
@@ -33,6 +41,13 @@ app.use(
         store: store
     })
 );
+app.use(cookieParser());
+app.use(doubleCsrfProtection);
+app.use((req: Request, res: Response, next: NextFunction) => {
+    res.locals.csrfToken = generateToken(req, res);
+    next();
+});
+
 
 app.use(mainRoutes);
 app.use(authRoutes);
