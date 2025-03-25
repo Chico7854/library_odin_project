@@ -12,7 +12,7 @@ export const postSignup = async (req: Request, res: Response, next: NextFunction
     const email = req.body.email;
     const password = req.body.password;
 
-    const hashedPassword = hash(password, 12);
+    const hashedPassword = await hash(password, 12);
 
     const user = new User({
         username: username,
