@@ -59,10 +59,14 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 app.use(mainRoutes);
 app.use(authRoutes);
+app.use((req: Request, res: Response, next: NextFunction) => {
+    res.status(404).render("404");
+});
+
 
 app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
     console.error(error);
-})
+});
 
 mongoose.connect(MONGODB_URI)
     .then(() => {

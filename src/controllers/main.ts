@@ -6,13 +6,15 @@ import User from "../models/User";
 import { create } from "domain";
 
 export const getIndex = async (req: Request, res: Response, next: NextFunction) => {
+    if (!req.session.isLoggedIn) {
+        return res.redirect("/login");
+    }
     try {
         const user = await User.findById(req.session.userId);
         if (!user) {
             throw createHttpError(404, "User not found.");
         }
         await user.populate("library.bookId");
-        console.log(user);
         res.render("index", {
             books: user.library
         });
