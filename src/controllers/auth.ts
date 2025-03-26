@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { hash, compare } from "bcrypt";
 import createHttpError from "http-errors";
+const { validationResult } = require("express-validator");  //it only works this way for some fucking reason
 
 import User from "../models/User";
 
@@ -9,16 +10,20 @@ export const getSignup = (req: Request, res: Response, next: NextFunction) => {
 }
 
 export const postSignup = async (req: Request, res: Response, next: NextFunction) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        console.log(errors.array()[0].msg);
+        return res.redirect("/signup");
+    }
+    
     const { username, email, password } = req.body;
 
     const hashedPassword = await hash(password, 12);
-
     const user = new User({
         username: username,
         email: email,
         password: hashedPassword
     });
-
     try {
         await user.save();
         req.session.isLoggedIn = true;

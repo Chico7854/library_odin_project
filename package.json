@@ -2,10 +2,11 @@
   "name": "library_odin_project",
   "version": "1.0.0",
   "description": "Project from \"The Odin Project\" to simulate a library. This projects was made to learn about objects",
-  "main": "app.js",
+  "main": "dist/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon"
+    "start": "nodemon",
+    "build": "node dist/app.js"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +22,7 @@
     "ejs": "^3.1.10",
     "express": "^4.21.2",
     "express-session": "^1.18.1",
+    "express-validator": "^7.2.1",
     "helmet": "^8.1.0",
     "http-errors": "^2.0.0",
     "mongoose": "^8.12.1"
@@ -32,10 +34,12 @@
     "@types/cookie-parser": "^1.4.8",
     "@types/cors": "^2.8.17",
     "@types/express-session": "^1.18.1",
+    "@types/express-validator": "^2.20.33",
     "@types/helmet": "^0.0.48",
     "@types/http-errors": "^2.0.4",
     "@types/mongoose": "^5.11.96",
     "nodemon": "^3.1.9",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
   }
 }

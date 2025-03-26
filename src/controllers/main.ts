@@ -3,7 +3,6 @@ import createHttpError from "http-errors";
 
 import Book from "../models/Book";
 import User from "../models/User";
-import { create } from "domain";
 
 export const getIndex = async (req: Request, res: Response, next: NextFunction) => {
     if (!req.session.isLoggedIn) {
