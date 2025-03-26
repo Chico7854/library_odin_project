@@ -65,7 +65,9 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 
 app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
-    console.error(error);
+    res.render("error.ejs", {
+        errorMessage: error
+    })
 });
 
 mongoose.connect(MONGODB_URI)
