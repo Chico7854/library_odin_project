@@ -56,6 +56,16 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     res.locals.csrfToken = generateToken(req, res);
     next();
 });
+app.use((req: Request, res: Response, next: NextFunction) => {
+    if (req.session.flash) {
+        res.locals.flash = req.session.flash;
+        delete req.session.flash;
+    } else {
+        res.locals.flash = null;
+    }
+    next();
+});
+
 
 app.use(mainRoutes);
 app.use(authRoutes);

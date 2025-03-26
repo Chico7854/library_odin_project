@@ -5,5 +5,6 @@ declare module 'express-session' {
   interface SessionData {
     userId?: string;
     isLoggedIn?: boolean;
+    flash?: string;
   }
 }
