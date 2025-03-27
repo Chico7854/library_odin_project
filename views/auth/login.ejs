@@ -16,5 +16,8 @@
             <button type="submit">Login</button>
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
         </form>
+        <% if (flash) { %>
+            <h3><%= flash %></h3>
+        <% } %>
     </main>
 </body>

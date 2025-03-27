@@ -46,15 +46,17 @@ export const postLogin = async (req: Request, res: Response, next: NextFunction)
     try {
         const user = await User.findOne({ email: email });
         if (!user) {
-            throw createHttpError(404, "User not found.");
+            req.session.flash = "Email or password incorrect.";
+            return res.redirect("/login");
         }
         const isValidPassword = await compare(password, user.password);
         if (isValidPassword) {
             req.session.isLoggedIn = true;
             req.session.userId = user._id.toString();
-            res.redirect("/");
+            return res.redirect("/");
         } else {
-            throw createHttpError(401, "Password doesn't match.");
+            req.session.flash = "Email or password incorrect.";
+            return res.redirect("/login");
         }
     } catch (err) {
         next(err);

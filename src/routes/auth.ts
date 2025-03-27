@@ -1,4 +1,5 @@
 import { Router, Request } from "express";
+import { compare } from "bcrypt";
 const { body } = require("express-validator");  //for some reason it only works this way
 
 import User from "../models/User";
