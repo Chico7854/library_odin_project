@@ -14,14 +14,13 @@ router.post("/signup",
         body("email")
             .isEmail().withMessage("Invalid email.")
             .custom(async (email: string) => {
-                console.log(email);
                 const user = await User.findOne({ email: email });
                 if (user) {
                     throw new Error("Email has already been used.");
                 }
             })
             .normalizeEmail(),
-        body("password", "Enter a password with numbers and letters and at least 8 characters.").isLength({ min: 8 }).isAlphanumeric().trim(),
+        body("password", "Enter a password with numbers and letters and at least 8 characters.").isLength({ min: 4 }).isAlphanumeric().trim(),
         body("confirmPassword").custom((confirmPassword: string, { req }: { req: Request }) => {
             if (confirmPassword !== req.body.password) {
                 throw new Error("Passwords don't match.");
