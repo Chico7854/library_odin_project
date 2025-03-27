@@ -43,6 +43,11 @@
                         <h2><%= book.bookId.title %></h2>
                         <p>by</p>
                         <h2><%= book.bookId.author %></h2>
+                        <% if (book.bookId.haveRead) { %>
+                            <h2>Have Read</h2>
+                        <% } else { %>
+                            <h2>Didn't Read</h2>
+                        <% } %>
                     </li>
                 <% }) %>
             <% } %>
