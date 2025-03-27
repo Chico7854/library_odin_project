@@ -44,6 +44,7 @@ export const addBook = async (req: Request, res: Response, next: NextFunction) =
         });
         await book.save();
         await user.save();
+        return res.redirect("/");
     } catch (err) {
         next(err);
     }
