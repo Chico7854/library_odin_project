@@ -1,7 +1,7 @@
 <nav>
     <a href="/" id="logo">myLibrary</a>
     <div id="login-options">
-        <% if (!isAuthorized) { %>
+        <% if (!isAuthenticated) { %>
             <a href="/login">Login</a>
             <a href="/signup">Signup</a>
         <% } else { %>

@@ -12,6 +12,7 @@ import compression from "compression";
 
 import mainRoutes from "./routes/main";
 import authRoutes from "./routes/auth";
+import isAuthenticated from "./middleware/isAuthenticated";
 
 const MONGODB_URI = "mongodb+srv://lacus7854:dl2RZ1UdK4Xd$9N@librarycluster.ncdub.mongodb.net/library?retryWrites=true&w=majority&appName=libraryCluster";
 
@@ -33,7 +34,6 @@ app.set("views", "views");
 
 app.use(express.static(path.join(__dirname, "..", "public")));
 app.use(express.urlencoded({ extended: false }));
-app.use(express.json())
 
 app.use(cors());
 app.use(helmet());
@@ -46,13 +46,14 @@ app.use(
         store: store
     })
 );
-app.use((req: Request, res: Response, next: NextFunction) => {
-    next();
-})
 app.use(cookieParser());
 app.use(doubleCsrfProtection);
 app.use((req: Request, res: Response, next: NextFunction) => {
-    res.locals.isAuthorized = req.session.isLoggedIn;
+    if (req.session.isLoggedIn) {
+        res.locals.isAuthenticated = true;
+    } else {
+        res.locals.isAuthenticated = false;
+    }
     res.locals.csrfToken = generateToken(req, res);
     next();
 });
@@ -70,7 +71,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 app.use(mainRoutes);
 app.use(authRoutes);
 app.use((req: Request, res: Response, next: NextFunction) => {
-    res.status(404).render("404");
+    res.render("404");
 });
 
 

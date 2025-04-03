@@ -12,7 +12,6 @@ router.post("/add-book", isAuthenticated,
     [
         body("title").isLength({ min: 1 }).trim(),
         body("author").isLength({ min: 1 }).trim(),
-        body("haveRead").isBoolean()
     ],
     mainController.addBook);
 
